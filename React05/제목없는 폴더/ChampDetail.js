@@ -1,0 +1,25 @@
+import React, {useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
+
+function ChampDetail() {
+    const {id} = useParams();
+    const [champion, setChampion] = useState(null);
+
+    useEffect(() => {
+        fetch(`http://ddragon.leagueoflegends.com/cdn/13.18.1/data/ko_KR/champion/${id}.json`)
+        .then(response => response.json())
+        .then(data => setChampion(data.data[id]));
+    }, [id]);
+
+    if (!champion) {
+        return <div>Loading...</div>
+    }
+
+    return (
+        <>
+            <h1>{champion.name}</h1>
+        </>
+    );
+}
+
+export default ChampDetail;

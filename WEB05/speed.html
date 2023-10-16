@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Keyboard Event Quiz</h2>
+
+<p id="letter">Get ready...</p>
+<p id="result"></p>
+
+<script>
+var letterElement = document.getElementById('letter');
+var resultElement = document.getElementById('result');
+
+// 랜덤 알파벳 생성
+var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+var randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+setTimeout(function() {
+  letterElement.textContent = "Please press: " + randomLetter;
+
+  // 시작 시간 저장
+  var startTime = Date.now();
+
+  document.addEventListener('keydown', function(event) {
+    // 입력한 키가 정답인지 확인
+    if (event.key === randomLetter) {
+      var endTime = Date.now();
+      var timeTaken = (endTime - startTime) / 1000; // 초 단위로 변환
+      resultElement.textContent = "정답입니다! 걸린 시간: " + timeTaken + "초";
+    } else {
+      resultElement.textContent ="오답입니다!";
+    }
+  });
+}, 2000);
+</script>
+
+</body>
+</html>
